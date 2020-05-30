@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:social_media_ui/screens/homepage.dart';
+import 'package:social_media_ui/screens/notificationpage.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,30 +11,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text("Social Media UI"),
-        ),
-        body: Center(
-          child: Container(
-            child: Text("let's start coding"),
-          ),
-        ),
-      ),
+      initialRoute: HomePage.routeName,
+      routes: {
+        HomePage.routeName: (context) => HomePage(),
+        NotificationPage.routeName: (context) => NotificationPage(),
+      },
     );
   }
 }
