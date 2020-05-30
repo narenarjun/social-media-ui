@@ -20,8 +20,13 @@ class _HomePageState extends State<HomePage> {
     "Following",
   ];
 
-  final images = [
+  final imagesLinksList = [
     null,
+    imageLink1,
+    imageLink2,
+    imageLink3,
+    imageLink4,
+    imageLink5,
   ];
 
   final Column menuIcon = Column(
@@ -55,11 +60,11 @@ class _HomePageState extends State<HomePage> {
                     onTap: () => Navigator.pushNamed(
                         context, NotificationPage.routeName),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(20),
                       child: Image.network(
                         profilePic,
-                        width: 34,
-                        height: 50,
+                        width: 50,
+                        height: 45,
                       ),
                     ),
                   ),
@@ -70,7 +75,9 @@ class _HomePageState extends State<HomePage> {
               child: ListView(
                 padding: EdgeInsets.zero,
                 children: <Widget>[
-                  SizedBox(height: 40),
+                  SizedBox(
+                    height: 40,
+                  ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 30),
                     child: Row(
@@ -89,7 +96,9 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 30),
                     child: Text(
@@ -100,18 +109,99 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 40),
-                  HomeMetricsTile(
-                    color: AppColors.kindOfOrange,
-                    number: 69,
-                    tileName: "photos",
+                  SizedBox(
+                    height: 40,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: HomeMetricsTile(
+                            color: AppColors.kindOfOrange,
+                            number: 69,
+                            tileName: "photos",
+                          ),
+                        ),
+                        SizedBox(width: 20),
+                        Expanded(
+                          child: HomeMetricsTile(
+                            color: AppColors.smoothred,
+                            number: 15,
+                            tileName: "articles",
+                          ),
+                        ),
+                        SizedBox(width: 20),
+                        Expanded(
+                          child: HomeMetricsTile(
+                            color: AppColors.smoothPurple,
+                            number: 32,
+                            tileName: "likes",
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    height: 80,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      padding: EdgeInsets.symmetric(horizontal: 30),
+                      separatorBuilder: (_, __) => SizedBox(width: 30),
+                      itemCount: filters.length,
+                      itemBuilder: (context, index) {
+                        final option = filters[index];
+                        bool active = option == selected;
+                        final textColor = active
+                            ? AppColors.kindOfOrange
+                            : Colors.grey.shade500;
+                        final fontWeight =
+                            active ? FontWeight.bold : FontWeight.normal;
+                        return FilterChip(
+                          elevation: 0,
+                          selected: active,
+                          pressElevation: 0,
+                          showCheckmark: false,
+                          backgroundColor: Colors.white,
+                          selectedColor: Colors.orange.withOpacity(0.1),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          onSelected: (s) {
+                            setState(() => selected = option);
+                          },
+                          label: Text(
+                            option.toUpperCase(),
+                            style: TextStyle(
+                              color: textColor,
+                              fontSize: 17,
+                              fontWeight: fontWeight,
+                              letterSpacing: 0.3,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                   SizedBox(height: 10),
                   sectionTitleWidget("My Photos"),
-                  SizedBox(height: 20),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Container(
                     height: 110,
-                    color: Colors.redAccent,
+                    child: ListView.separated(
+                      itemCount: imagesLinksList.length,
+                      scrollDirection: Axis.horizontal,
+                      padding: EdgeInsets.symmetric(horizontal: 30),
+                      separatorBuilder: (_, __) => SizedBox(width: 12),
+                      itemBuilder: (context, index) {
+                        return photoContainer(imageURL: imagesLinksList[index]);
+                      },
+                    ),
                   ),
                   SizedBox(
                     height: 40,
@@ -120,9 +210,24 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(
                     height: 20,
                   ),
-                  videoContainer(
-                    vimageURL: imageLink2,
+                  Container(
+                    height: 145,
+                    child: ListView.separated(
+                      itemCount: 3,
+                      scrollDirection: Axis.horizontal,
+                      padding: EdgeInsets.symmetric(horizontal: 30),
+                      separatorBuilder: (_, __) => SizedBox(width: 12),
+                      itemBuilder: (context, index) {
+                        final list = imagesLinksList.reversed.toList();
+                        return videoContainer(
+                          vimageURL: list[index],
+                        );
+                      },
+                    ),
                   ),
+                  SizedBox(
+                    height: 20,
+                  )
                 ],
               ),
             ),

@@ -49,11 +49,11 @@ class _NotificationPageState extends State<NotificationPage> {
                   InkWell(
                     onTap: () => Navigator.pop(context),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(20),
                       child: Image.network(
                         profilePic,
-                        width: 34,
-                        height: 50,
+                        width: 50,
+                        height: 45,
                       ),
                     ),
                   ),
