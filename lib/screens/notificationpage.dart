@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../components/widgets.dart';
 import '../constants/appconstants.dart';
@@ -100,11 +101,13 @@ class _NotificationPageState extends State<NotificationPage> {
                       children: [
                         Text(
                           "Notifications",
-                          style: TextStyle(
-                            fontSize: 38,
-                            color: AppColors.smoothBlue,
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: 1.2,
+                          style: GoogleFonts.firaSansExtraCondensed(
+                            textStyle: TextStyle(
+                              color: AppColors.smoothBlue,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 38,
+                              letterSpacing: 1.2,
+                            ),
                           ),
                         ),
                         SizedBox(width: 20),

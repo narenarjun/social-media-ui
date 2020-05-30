@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:social_media_ui/constants/appconstants.dart';
-import 'package:social_media_ui/screens/notificationpage.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../components/widgets.dart';
+import '../constants/appconstants.dart';
+import 'notificationpage.dart';
 
 class HomePage extends StatefulWidget {
   static const String routeName = "/";
@@ -85,11 +86,13 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Text(
                           "Feed",
-                          style: TextStyle(
-                            fontSize: 38,
-                            color: AppColors.smoothBlue,
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: 1.2,
+                          style: GoogleFonts.firaSansExtraCondensed(
+                            textStyle: TextStyle(
+                              color: AppColors.smoothBlue,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 38,
+                              letterSpacing: 1.2,
+                            ),
                           ),
                         ),
                         SizedBox(width: 20),
