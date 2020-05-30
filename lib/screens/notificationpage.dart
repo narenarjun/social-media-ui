@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:social_media_ui/components/badgeWidget.dart';
-import 'package:social_media_ui/constants/appconstants.dart';
+
+import '../components/widgets.dart';
+import '../constants/appconstants.dart';
 
 class NotificationPage extends StatefulWidget {
   static const String routeName = "/NOTIFICATIONPAGE";
@@ -10,16 +11,43 @@ class NotificationPage extends StatefulWidget {
 }
 
 class _NotificationPageState extends State<NotificationPage> {
-  String selected = 'Chat';
-  final filters = [
-    "Chat",
-    "Featured",
-    "Popular",
-    "Following",
+  String crntFilter = 'Today';
+  final filters = ["Today", "Last Week"];
+
+  final List<Map<String, String>> infoList = [
+    {
+      "usrname": "haskell",
+      'comnt': "stunning",
+      "cmntage": "10 hrs ago",
+    },
+    {
+      "usrname": "dashcast",
+      'comnt': "wowwwwwww",
+      "cmntage": "1 hrs ago",
+    },
+    {
+      "usrname": "Elixir",
+      'comnt': "cute",
+      "cmntage": "2 hrs ago",
+    },
+    {
+      "usrname": "Gatsby",
+      'comnt': "yayyyyyyyy",
+      "cmntage": "10 hrs ago",
+    },
+    {
+      "usrname": "VsCode",
+      'comnt': "wonderful",
+      "cmntage": "2s ago",
+    },
   ];
 
-  final images = [
-    null,
+  final postImagesLinks = [
+    postImageLink1,
+    postImageLink2,
+    postImageLink3,
+    postImageLink4,
+    postImageLink5,
   ];
 
   final Column menuIcon = Column(
@@ -85,11 +113,73 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                   ),
                   SizedBox(height: 10),
-// ! this is where the page widgets need to be filled
-
+                  Padding(
+                    padding: EdgeInsets.all(30),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.grey[300],
+                        contentPadding: EdgeInsets.all(20),
+                        prefixIcon: Icon(
+                          Icons.search,
+                          color: AppColors.smoothBlue,
+                          size: 26,
+                        ),
+                        hintText: 'Search for name',
+                        hintStyle: TextStyle(
+                            fontSize: 20, color: Colors.grey.shade400),
+                        border: UnderlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                    ),
+                  ),
                   Container(
-                    color: Colors.greenAccent,
-                    child: Text("let's start the notification Page"),
+                    height: 20,
+                    margin: EdgeInsets.fromLTRB(30, 15, 30, 20),
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: filters.length,
+                      separatorBuilder: (_, __) => SizedBox(width: 40),
+                      itemBuilder: (context, index) {
+                        final filter = filters[index];
+                        bool active = crntFilter == filter;
+                        return Text(
+                          filter.toUpperCase(),
+                          style: TextStyle(
+                            color: active
+                                ? AppColors.smoothBlue
+                                : Colors.grey.shade400,
+                            fontSize: 18,
+                            letterSpacing: 0.4,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(42, 50, 42, 42),
+                    decoration: BoxDecoration(
+                      color: AppColors.scrollSheet,
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(40),
+                      ),
+                    ),
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      primary: false,
+                      separatorBuilder: (_, __) => SizedBox(height: 46),
+                      itemCount: postImagesLinks.length,
+                      itemBuilder: (context, index) {
+                        return notificationItem(
+                          postImageURL: postImagesLinks[index],
+                          usrname: infoList[index]["usrname"],
+                          commentTxt: infoList[index]["comnt"],
+                          postedAgo: infoList[index]["cmntage"],
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),
